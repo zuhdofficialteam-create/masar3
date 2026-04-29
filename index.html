@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="مسار التحرر — برنامج علمي إسلامي لتحرير الإرادة خلال ٣٠ يوماً">
+<meta name="theme-color" content="#070A0D">
+<title>مسار التحرر — ZUHD Essence</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ====== BACKGROUND ====== -->
+<div class="bg-orbs" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+<!-- ====== MOBILE TOGGLE ====== -->
+<button class="menu-toggle" onclick="toggleSidebar()" aria-label="القائمة">
+  <span></span><span></span><span></span>
+</button>
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- ====== LEFT CONTROLS BOX ====== -->
+<div class="controls-box" role="complementary" aria-label="أدوات التحكم">
+  <div class="controls-label" id="ctrl-lang-label">اللغة</div>
+  <div class="ctrl-lang-group">
+    <button class="ctrl-lang-btn active" data-lang="ar" onclick="setLang('ar')" aria-label="عربي">عر</button>
+    <button class="ctrl-lang-btn" data-lang="en" onclick="setLang('en')" aria-label="English">EN</button>
+  </div>
+  <div class="controls-divider"></div>
+  <div class="controls-label" id="ctrl-theme-label">الثيم</div>
+  <button class="ctrl-theme-btn active" data-theme="dark"   onclick="setTheme('dark')"   title="داكن">🌑</button>
+  <button class="ctrl-theme-btn"        data-theme="light"  onclick="setTheme('light')"  title="فاتح">☀️</button>
+  <button class="ctrl-theme-btn"        data-theme="ocean"  onclick="setTheme('ocean')"  title="أزرق">🌊</button>
+  <button class="ctrl-theme-btn"        data-theme="forest" onclick="setTheme('forest')" title="أخضر">🌿</button>
+</div>
+
+<!-- ====== SIDEBAR ====== -->
+<aside class="sidebar" id="sidebar" role="navigation" aria-label="القائمة الرئيسية">
+  <div class="sidebar-glow"></div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo-img" style="display:flex;align-items:center;justify-content:center;font-size:1.8rem;background:linear-gradient(135deg,#0D1118,#1C2236);color:#C9A84C;">🕌</div>
+      <div>
+        <span class="brand-main">مسار التحرر</span>
+        <span class="brand-sub">ZUHD ESSENCE · v5.0</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav-container">
+    <!-- Group 1 -->
+    <div class="nav-group open" id="navgroup-1">
+      <div class="nav-group-header" onclick="toggleNavGroup('navgroup-1')">
+        <span class="nav-group-icon">🌱</span>
+        <span class="nav-group-label" data-i18n="nav_group_start">البداية والوعي</span>
+        <span class="nav-group-arrow">▶</span>
+      </div>
+      <div class="nav-group-items">
+        <div class="nav-link active" onclick="showPage(1)">
+          <span class="nav-num">١</span>
+          <span data-i18n="nav_1">البداية والالتزام</span>
+          <div class="nav-check" id="nc-1"></div>
+        </div>
+        <div class="nav-link" onclick="showPage(2)">
+          <span class="nav-num">٢</span>
+          <span data-i18n="nav_2">التشخيص الصادق</span>
+          <div class="nav-check" id="nc-2"></div>
+        </div>
+        <div class="nav-link" onclick="showPage(3)">
+          <span class="nav-num">٣</span>
+          <span data-i18n="nav_3">علم الدوبامين</span>
+          <div class="nav-check" id="nc-3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Group 2 -->
+    <div class="nav-group" id="navgroup-2">
+      <div class="nav-group-header" onclick="toggleNavGroup('navgroup-2')">
+        <span class="nav-group-icon">⚔️</span>
+        <span class="nav-group-label" data-i18n="nav_group_action">التغيير والعمل</span>
+        <span class="nav-group-arrow">▶</span>
+      </div>
+      <div class="nav-group-items">
+        <div class="nav-link" onclick="showPage(4)">
+          <span class="nav-num">٤</span>
+          <span data-i18n="nav_4">خطة الاستبدال</span>
+          <div class="nav-check" id="nc-4"></div>
+        </div>
+        <div class="nav-link" onclick="showPage(5)">
+          <span class="nav-num">٥</span>
+          <span data-i18n="nav_5">المتتبع اليومي</span>
+          <div class="nav-check" id="nc-5"></div>
+        </div>
+        <div class="nav-link" onclick="showPage(6)">
+          <span class="nav-num">٦</span>
+          <span data-i18n="nav_6">تحصين البيئة</span>
+          <div class="nav-check" id="nc-6"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Group 3 -->
+    <div class="nav-group" id="navgroup-3">
+      <div class="nav-group-header" onclick="toggleNavGroup('navgroup-3')">
+        <span class="nav-group-icon">🏆</span>
+        <span class="nav-group-label" data-i18n="nav_group_sustain">الاستمرار والانتصار</span>
+        <span class="nav-group-arrow">▶</span>
+      </div>
+      <div class="nav-group-items">
+        <div class="nav-link" onclick="showPage(7)">
+          <span class="nav-num">٧</span>
+          <span data-i18n="nav_7">صفحة الإنقاذ</span>
+          <div class="nav-check" id="nc-7"></div>
+        </div>
+        <div class="nav-link" onclick="showPage(8)">
+          <span class="nav-num">٨</span>
+          <span data-i18n="nav_8">شبكة الـ٣٠ يوم</span>
+          <div class="nav-check" id="nc-8"></div>
+        </div>
+        <div class="nav-link" onclick="showPage(9)">
+          <span class="nav-num">٩</span>
+          <span data-i18n="nav_9">التقرير والخريطة</span>
+          <div class="nav-check" id="nc-9"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Progress -->
+  <div class="sidebar-progress">
+    <div class="progress-label">
+      <span data-i18n="progress_label">تقدمك في المسار</span>
+      <span id="progress-pct">0٪</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+    <div class="sidebar-points">
+      <span class="points-icon">⭐</span>
+      <span class="points-value" id="sidebar-points-val">0</span>
+      <span class="level-badge" id="sidebar-level">🌱 مبتدئ</span>
+    </div>
+    <div class="xp-bar"><div class="xp-fill" id="xp-fill"></div></div>
+    <div class="xp-label" id="xp-label">0 / 50</div>
+    <!-- Storage Actions -->
+    <div class="sidebar-storage">
+      <button class="storage-btn" onclick="handleExportSession()">
+        <span>💾</span><span data-i18n="storage_export">تصدير الجلسة</span>
+      </button>
+      <button class="storage-btn" onclick="handleImportSession()">
+        <span>📥</span><span data-i18n="storage_import">استيراد البيانات</span>
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- ====== MAIN CONTENT ====== -->
+<main class="main-content" role="main">
+
+  <!-- ==================== PAGE 1: البداية ==================== -->
+  <section class="page-section active" id="page-1" aria-label="صفحة البداية">
+    <div class="hero-section">
+      <div class="hero-zuhd">
+        <div class="hero-logo" style="width:90px;height:90px;border-radius:20px;background:linear-gradient(135deg,#0D1118,#1C2236);display:flex;align-items:center;justify-content:center;font-size:3rem;margin:0 auto;box-shadow:0 0 40px rgba(201,168,76,0.25);">🕌</div>
+      </div>
+      <div class="page-badge" data-i18n="badge_1">مسار علمي + إسلامي مدمج · ٣٠ يوماً</div>
+      <div class="hero-ornament">— ✦ —</div>
+      <h1 class="hero-title" data-i18n="hero_title">مسار التحرر</h1>
+      <p class="hero-tagline" data-i18n="hero_tagline">من الوعي إلى التغيير — خطوة بخطوة</p>
+      <div class="hero-cards">
+        <span class="hero-mini-card" data-i18n="card_time">٣-٥ دقائق</span>
+        <span class="hero-mini-card" data-i18n="card_daily">يومياً</span>
+        <span class="hero-mini-card" data-i18n="card_30">٣٠ يوماً</span>
+        <span class="hero-mini-card" data-i18n="card_cycle">دورة كاملة</span>
+        <span class="hero-mini-card" data-i18n="card_science">علم نفس + سنّة</span>
+        <span class="hero-mini-card" data-i18n="card_save">حفظ تلقائي</span>
+        <span class="hero-mini-card" data-i18n="card_points">نظام نقاط وشارات</span>
+      </div>
+      <button class="start-btn" onclick="showPage(2)" data-i18n="btn_start">ابدأ رحلتك الآن ←</button>
+    </div>
+
+    <div class="section-inner">
+      <div class="divider"></div>
+      <p class="section-title" data-i18n="why_title">لماذا مسار التحرر؟</p>
+
+      <div class="compare-grid">
+        <div>
+          <div class="compare-header bad" data-i18n="compare_bad">❌ المنتجات التقليدية</div>
+          <div class="compare-list">
+            <div class="compare-item bad">تحفيز بلا آلية</div>
+            <div class="compare-item bad">عام وغير شخصي</div>
+            <div class="compare-item bad">تجاهل الجانب الروحي</div>
+            <div class="compare-item bad">بلا متابعة أو تقارير</div>
+          </div>
+        </div>
+        <div class="compare-vs-center">VS</div>
+        <div>
+          <div class="compare-header good" data-i18n="compare_good">✅ مسار التحرر</div>
+          <div class="compare-list">
+            <div class="compare-item good">علم دوبامين + سنّة نبوية</div>
+            <div class="compare-item good">خريطة شخصية لكل مستخدم</div>
+            <div class="compare-item good">تكامل روحي ونفسي وسلوكي</div>
+            <div class="compare-item good">تقارير ذكية + خريطة تفاعلية</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card text-center">
+          <div class="icon-lg">🧠</div>
+          <div class="card-title">علم معتمد</div>
+          <p class="card-desc">مبني على أحدث أبحاث علم الأعصاب وعلم النفس السلوكي</p>
+        </div>
+        <div class="card text-center">
+          <div class="icon-lg">📖</div>
+          <div class="card-title">منهج إسلامي</div>
+          <p class="card-desc">مدمج مع التوبة والاستغفار والبدائل الروحية الصحيحة</p>
+        </div>
+        <div class="card text-center">
+          <div class="icon-lg">🗺</div>
+          <div class="card-title">خريطة شخصية</div>
+          <p class="card-desc">يولّد النظام خريطة بصرية حول شخصيتك وتحدياتك</p>
+        </div>
+      </div>
+
+      <!-- Identity form -->
+      <div class="card card-teal">
+        <div class="card-header">
+          <div class="card-icon icon-gold">🤝</div>
+          <div>
+            <div class="card-title">التزامك الأول</div>
+            <div class="card-subtitle">هذه المعلومات تُحفظ وتظهر في خريطتك الشخصية</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label gold" data-i18n="photo_label">صورتك الشخصية</label>
+          <div class="photo-upload-area" onclick="document.getElementById('photo-input').click()">
+            <div class="photo-preview" id="photo-preview">
+              <div class="photo-placeholder">📷</div>
+              <div class="photo-hint" data-i18n="photo_hint">انقر لرفع صورة (حتى 4K)</div>
+            </div>
+            <input type="file" id="photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label gold" data-i18n="name_label">اسمك في المسار</label>
+          <input type="text" class="form-input" id="user-name" placeholder="اكتب اسمك أو لقبك هنا...">
+        </div>
+        <div class="form-group">
+          <label class="form-label teal" data-i18n="reason_label">سببك الحقيقي</label>
+          <input type="text" class="form-input" id="user-reason" placeholder="مثال: أريد أن أكون قدوة لأبنائي...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">📅 تاريخ بداية الرحلة</label>
+          <input type="date" class="form-input" id="commitment-date">
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <div></div>
+        <button class="btn btn-gold" onclick="showPage(2)" data-i18n="btn_diagnose">ابدأ التشخيص ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 2: التشخيص ==================== -->
+  <section class="page-section" id="page-2">
+    <div class="page-hero">
+      <div class="page-badge">الصفحة الثانية</div>
+      <h2 class="page-title"><span class="gold-accent" data-i18n="p2_title">التشخيص</span> <span data-i18n="p2_title2">الصادق</span></h2>
+      <p class="page-desc" data-i18n="p2_desc">أجب بصدق — هذه ليست محاكمة، بل خريطة تساعدك على فهم نفسك</p>
+    </div>
+
+    <div class="section-inner">
+
+      <div class="card card-teal">
+        <div class="card-header">
+          <div class="card-icon icon-teal">🗺</div>
+          <div>
+            <div class="card-title" data-i18n="triggers_title">خريطة المحفزات</div>
+            <div class="card-subtitle" data-i18n="triggers_sub">متى وأين وكيف تبدأ الرغبة؟</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label" data-i18n="when_label">متى تكون الرغبة أقوى؟</div>
+          <div class="radio-group" id="time-triggers">
+            <div class="radio-opt" data-val="night" onclick="toggleOpt(this,'time')">🌙 الليل</div>
+            <div class="radio-opt" data-val="morning" onclick="toggleOpt(this,'time')">🌅 الصباح</div>
+            <div class="radio-opt" data-val="alone" onclick="toggleOpt(this,'time')">🚶 الوحدة</div>
+            <div class="radio-opt" data-val="stress" onclick="toggleOpt(this,'time')">😰 التوتر</div>
+            <div class="radio-opt" data-val="bored" onclick="toggleOpt(this,'time')">😑 الملل</div>
+            <div class="radio-opt" data-val="after_failure" onclick="toggleOpt(this,'time')">😞 بعد فشل</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label" data-i18n="where_label">أين تكون الرغبة أقوى؟</div>
+          <div class="radio-group" id="place-triggers">
+            <div class="radio-opt" data-val="room" onclick="toggleOpt(this,'place')">🛏 الغرفة</div>
+            <div class="radio-opt" data-val="bathroom" onclick="toggleOpt(this,'place')">🚿 الحمام</div>
+            <div class="radio-opt" data-val="phone" onclick="toggleOpt(this,'place')">📱 الهاتف</div>
+            <div class="radio-opt" data-val="outside" onclick="toggleOpt(this,'place')">🏙 خارج البيت</div>
+            <div class="radio-opt" data-val="work" onclick="toggleOpt(this,'place')">💼 مكان العمل</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label red" data-i18n="warning_label">أول علامة تحذيرية قبل الانتكاسة</label>
+          <input type="text" class="form-input" id="warning-sign" placeholder="مثال: أبدأ بالتمرير بلا هدف...">
+        </div>
+
+        <div class="form-group">
+          <div class="form-label" data-i18n="intensity_label">شدة السلوك (١ — ١٠)</div>
+          <div class="slider-wrap">
+            <span>١</span>
+            <input type="range" class="intensity-slider" id="intensity-slider" min="1" max="10" value="5" oninput="updateSlider(this)">
+            <span>١٠</span>
+            <span class="slider-val" id="slider-val">5</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-red">💸</div>
+          <div>
+            <div class="card-title" data-i18n="cost_title">الثمن الحقيقي</div>
+          </div>
+        </div>
+        <div class="quote-block" data-i18n="cost_q">"ما الثمن الحقيقي الذي يكلّفك هذا السلوك روحياً، نفسياً، اجتماعياً؟"</div>
+        <div class="grid-3">
+          <div class="form-group">
+            <label class="form-label">🕌 <span data-i18n="spiritual">الأثر الروحي</span></label>
+            <textarea class="form-textarea" placeholder="كيف يؤثر على علاقتك بالله؟" style="min-height:65px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">🧠 <span data-i18n="mental">الأثر النفسي</span></label>
+            <textarea class="form-textarea" placeholder="كيف يؤثر على نفسيتك وتركيزك؟" style="min-height:65px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">👥 <span data-i18n="social">الأثر الاجتماعي</span></label>
+            <textarea class="form-textarea" placeholder="كيف يؤثر على علاقاتك؟" style="min-height:65px;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <button class="btn btn-outline" onclick="showPage(1)">← السابق</button>
+        <button class="btn btn-gold" onclick="showPage(3)" data-i18n="p2_next">علم الدوبامين ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 3: الدوبامين ==================== -->
+  <section class="page-section" id="page-3">
+    <div class="page-hero">
+      <div class="page-badge">الصفحة الثالثة</div>
+      <h2 class="page-title">علم <span class="gold-accent">الدوبامين</span></h2>
+      <p class="page-desc">فهم الآلية هو أول خطوات الكسر</p>
+    </div>
+
+    <div class="section-inner">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-gold">⚡</div>
+          <div>
+            <div class="card-title">حلقة الدوبامين</div>
+            <div class="card-subtitle">كيف يخطف دماغك ويكرر السلوك تلقائياً؟</div>
+          </div>
+        </div>
+        <div id="dopamine-diagram"></div>
+        <div class="alert alert-gold">
+          <span class="alert-icon">💡</span>
+          <span>الدوبامين لا يُفرز من المتعة نفسها — بل من <strong>توقُّعها</strong>. هذا هو السبب في أن الشاشة تسحبك حتى قبل أن تفتح التطبيق.</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-teal">🔄</div>
+          <div>
+            <div class="card-title">الحلقة في حياتك</div>
+            <div class="card-subtitle">من الوقوع إلى الخروج</div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div>
+            <div class="form-label red" style="margin-bottom:0.5rem;">🔴 حلقة الإدمان</div>
+            <div class="loop-diagram">
+              <div class="loop-node danger">المحفّز (بروشر/خلوة/ملل)</div>
+              <div class="loop-arrow">↓</div>
+              <div class="loop-node danger">الرغبة تشتعل</div>
+              <div class="loop-arrow">↓</div>
+              <div class="loop-node danger">السلوك الضار</div>
+              <div class="loop-arrow">↓</div>
+              <div class="loop-node danger">ذنب + ضعف + تكرار</div>
+            </div>
+          </div>
+          <div>
+            <div class="form-label teal" style="margin-bottom:0.5rem;">🟢 حلقة التحرر</div>
+            <div class="loop-diagram">
+              <div class="loop-node success">المحفّز (نفس الموقف)</div>
+              <div class="loop-arrow">↓</div>
+              <div class="loop-node success">كلمتك السرية تضرب</div>
+              <div class="loop-arrow">↓</div>
+              <div class="loop-node success">البديل الإيجابي</div>
+              <div class="loop-arrow">↓</div>
+              <div class="loop-node success">قوة + رضا + تكرار ✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-teal">
+        <div class="card-header">
+          <div class="card-icon icon-teal">🕌</div>
+          <div>
+            <div class="card-title">الدوبامين الإسلامي</div>
+            <div class="card-subtitle">أعلى مستوى من الرضا المستدام</div>
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="card text-center" style="border-color:rgba(201,168,76,0.15);">
+            <div class="icon-lg">🤲</div>
+            <div class="card-title">الصلاة</div>
+            <p class="card-desc">تُفرز الأوكسيتوسين والسيروتونين + تقطع الحلقة فوراً</p>
+          </div>
+          <div class="card text-center" style="border-color:rgba(42,191,163,0.15);">
+            <div class="icon-lg">📖</div>
+            <div class="card-title">القرآن</div>
+            <p class="card-desc">يُعيد برمجة الشبكات العصبية المرتبطة بالإدمان</p>
+          </div>
+          <div class="card text-center" style="border-color:rgba(201,168,76,0.15);">
+            <div class="icon-lg">🏃</div>
+            <div class="card-title">الرياضة</div>
+            <p class="card-desc">تُفرز الإندورفين وتستهلك الطاقة المتراكمة</p>
+          </div>
+        </div>
+        <div class="quote-block">
+          "وَلَمَن صَبَرَ وَغَفَرَ إِنَّ ذَٰلِكَ لَمِنْ عَزْمِ الْأُمُورِ"
+          <div style="font-size:0.75rem; font-family:'Cairo',sans-serif; margin-top:4px; color:var(--text-muted);">الشورى: ٤٣</div>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <button class="btn btn-outline" onclick="showPage(2)">← السابق</button>
+        <button class="btn btn-gold" onclick="showPage(4)">خطة الاستبدال ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 4: الاستبدال ==================== -->
+  <section class="page-section" id="page-4">
+    <div class="page-hero">
+      <div class="page-badge">الصفحة الرابعة</div>
+      <h2 class="page-title">خطة <span class="teal-accent">الاستبدال</span></h2>
+      <p class="page-desc">لا تُفرّغ فراغاً — بل امْلأه ببديل أقوى</p>
+    </div>
+
+    <div class="section-inner">
+      <div class="card card-teal">
+        <div class="card-header">
+          <div class="card-icon icon-gold">🔑</div>
+          <div>
+            <div class="card-title">كلمتك السرية</div>
+            <div class="card-subtitle">كلمة واحدة تضربها فور ظهور الرغبة لتوقف الحلقة</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label gold">اكتب كلمتك السرية أو جملتك القصيرة</label>
+          <input type="text" class="form-input" id="keyword" placeholder="مثال: أنا حر · محرر · لا للعودة · ابني ينتظرني...">
+        </div>
+        <div class="alert alert-gold">
+          <span class="alert-icon">⚡</span>
+          <span>اجعلها كلمة تحرّك فيك شيئاً — ليس مجرد كلمة جميلة</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-teal">🚪</div>
+          <div>
+            <div class="card-title">أبواب الاستبدال</div>
+            <div class="card-subtitle">اختر أبوابك وخصّصها — كلما فتحتَ باباً زادت نقاطك</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="door-card" onclick="toggleDoor(this)">
+            <span class="door-icon">🕌</span>
+            <div class="door-title">الملاذ الروحي</div>
+            <div class="door-examples">صلاة · ذكر · استغفار · قرآن</div>
+            <div class="door-input">
+              <textarea class="form-textarea" placeholder="ماذا ستفعل تحديداً؟ (ركعتين + استغفار ٣٣ مرة...)" onclick="event.stopPropagation()"></textarea>
+            </div>
+          </div>
+          <div class="door-card" onclick="toggleDoor(this)">
+            <span class="door-icon">💪</span>
+            <div class="door-title">البديل الجسدي</div>
+            <div class="door-examples">جري · ضغط · مشي سريع</div>
+            <div class="door-input">
+              <textarea class="form-textarea" placeholder="ماذا ستفعل تحديداً؟ (٢٠ ضغطة + شرب ماء...)" onclick="event.stopPropagation()"></textarea>
+            </div>
+          </div>
+          <div class="door-card" onclick="toggleDoor(this)">
+            <span class="door-icon">📞</span>
+            <div class="door-title">الملاذ الاجتماعي</div>
+            <div class="door-examples">اتصل بصديق · قاطع الوحدة</div>
+            <div class="door-input">
+              <textarea class="form-textarea" placeholder="من ستتصل به؟ أو أين ستذهب؟" onclick="event.stopPropagation()"></textarea>
+            </div>
+          </div>
+          <div class="door-card" onclick="toggleDoor(this)">
+            <span class="door-icon">🧠</span>
+            <div class="door-title">البديل الذهني</div>
+            <div class="door-examples">كتاب · مهارة · دورة · تعلّم</div>
+            <div class="door-input">
+              <textarea class="form-textarea" placeholder="ماذا ستقرأ أو تتعلم؟" onclick="event.stopPropagation()"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-gold">⏱</div>
+          <div>
+            <div class="card-title">بروتوكول الـ٥ دقائق</div>
+            <div class="card-subtitle">عندما تضرب الرغبة — هذه خطواتك الفورية</div>
+          </div>
+        </div>
+        <div class="grid-4">
+          <div class="card text-center" style="padding:1rem;">
+            <div style="font-size:2rem;">1️⃣</div>
+            <div class="card-title" style="font-size:0.85rem;">قل كلمتك</div>
+            <p class="card-desc">بصوت عالٍ إن أمكن</p>
+          </div>
+          <div class="card text-center" style="padding:1rem;">
+            <div style="font-size:2rem;">2️⃣</div>
+            <div class="card-title" style="font-size:0.85rem;">غيّر المكان</div>
+            <p class="card-desc">انهض وتحرك فوراً</p>
+          </div>
+          <div class="card text-center" style="padding:1rem;">
+            <div style="font-size:2rem;">3️⃣</div>
+            <div class="card-title" style="font-size:0.85rem;">استغفر ٣×</div>
+            <p class="card-desc">أسرع قاطع للرغبة</p>
+          </div>
+          <div class="card text-center" style="padding:1rem;">
+            <div style="font-size:2rem;">4️⃣</div>
+            <div class="card-title" style="font-size:0.85rem;">افتح بابك</div>
+            <p class="card-desc">نفّذ بديلك المحدد</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <button class="btn btn-outline" onclick="showPage(3)">← السابق</button>
+        <button class="btn btn-gold" onclick="showPage(5)">المتتبع اليومي ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 5: المتتبع ==================== -->
+  <section class="page-section" id="page-5">
+    <div class="page-hero">
+      <div class="page-badge">الصفحة الخامسة</div>
+      <h2 class="page-title">المتتبع <span class="gold-accent">اليومي</span></h2>
+      <p class="page-desc">سجّل عاداتك الأسبوعية — كل تظليل هو انتصار صغير</p>
+    </div>
+
+    <div class="section-inner">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-gold">📊</div>
+          <div>
+            <div class="card-title">العادات الأسبوعية</div>
+            <div class="card-subtitle">انقر على الخلية لتسجيل إنجازك</div>
+          </div>
+        </div>
+
+        <!-- Tracker Header -->
+        <div class="tracker-header">
+          <div class="tracker-empty"></div>
+          <div class="tracker-days">
+            <div class="day-label">الأحد</div>
+            <div class="day-label">الإثنين</div>
+            <div class="day-label">الثلاثاء</div>
+            <div class="day-label">الأربعاء</div>
+            <div class="day-label">الخميس</div>
+            <div class="day-label">الجمعة</div>
+            <div class="day-label">السبت</div>
+          </div>
+        </div>
+
+        <div class="tracker-grid" id="habit-tracker"></div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1.25rem; padding-top:1rem; border-top:1px solid var(--border-subtle);">
+          <div>
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:3px;">النقاط الأسبوعية</div>
+            <div style="font-size:2rem; font-weight:700; color:var(--gold); font-family:'Amiri',serif;" id="weekly-score">0</div>
+          </div>
+          <div class="grid-actions" style="margin:0;">
+            <button class="btn btn-outline btn-sm" onclick="buildTracker()">🔄 إعادة بناء</button>
+            <button class="btn btn-gold btn-sm" onclick="showPage(6)">التالي ←</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <button class="btn btn-outline" onclick="showPage(4)">← السابق</button>
+        <button class="btn btn-gold" onclick="showPage(6)">تحصين البيئة ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 6: البيئة ==================== -->
+  <section class="page-section" id="page-6">
+    <div class="page-hero">
+      <div class="page-badge">الصفحة السادسة</div>
+      <h2 class="page-title">تحصين <span class="teal-accent">البيئة</span></h2>
+      <p class="page-desc">البيئة أقوى من الإرادة — غيّر بيئتك قبل نفسك</p>
+    </div>
+
+    <div class="section-inner">
+      <div class="alert alert-gold">
+        <span class="alert-icon">🧠</span>
+        <span>البحث العلمي يُثبت أن <strong>٩٠٪</strong> من قرارات الانتكاسة تحدث بسبب المحيط — لا ضعف الإرادة.</span>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-gold">📱</div>
+          <div>
+            <div class="card-title">تحصين هاتفك</div>
+            <div class="card-subtitle">انقر على كل بند لتمييزه كمنجز</div>
+          </div>
+        </div>
+        <div class="check-list" id="phone-checks"></div>
+      </div>
+
+      <div class="card card-teal">
+        <div class="card-header">
+          <div class="card-icon icon-teal">🏠</div>
+          <div>
+            <div class="card-title">تحصين مكانك</div>
+            <div class="card-subtitle">بيئتك هي أول خط دفاع</div>
+          </div>
+        </div>
+        <div class="check-list" id="space-checks"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-gold">⏰</div>
+          <div>
+            <div class="card-title">جدولة أوقات الخطر</div>
+            <div class="card-subtitle">خطط لأوقات ضعفك مسبقاً</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">وقت الخطر الأول — ماذا ستفعل بدلاً منه؟</label>
+          <input type="text" class="form-input" placeholder="مثال: الليل بعد العشاء → سأقرأ ١٠ صفحات + أنام مبكراً">
+        </div>
+        <div class="form-group">
+          <label class="form-label">وقت الخطر الثاني</label>
+          <input type="text" class="form-input" placeholder="مثال: وقت الفراغ → سأتصل بصديق أو أذهب للرياضة">
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <button class="btn btn-outline" onclick="showPage(5)">← السابق</button>
+        <button class="btn btn-gold" onclick="showPage(7)">صفحة الإنقاذ ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 7: الإنقاذ ==================== -->
+  <section class="page-section" id="page-7">
+    <div class="page-hero">
+      <div class="page-badge rescue-badge">🆘 صفحة الطوارئ</div>
+      <h2 class="page-title">صفحة <span style="color:var(--red-soft);">الإنقاذ</span></h2>
+      <p class="page-desc">إذا وقعت — لا تنهار. هذه خطواتك الخمس للعودة</p>
+    </div>
+
+    <div class="section-inner">
+      <div class="quote-block" style="text-align:center; font-size:1.1rem;">
+        "قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَىٰ أَنفُسِهِمْ لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ ۚ إِنَّ اللَّهَ يَغْفِرُ الذُّنُوبَ جَمِيعًا"
+        <div style="font-size:0.75rem; font-family:'Cairo',sans-serif; margin-top:6px; color:var(--text-muted);">الزمر: ٥٣</div>
+      </div>
+
+      <div class="rescue-protocol">
+        <div class="rescue-title">⚓ بروتوكول العودة — ٥ خطوات فورية</div>
+        <div id="rescue-steps"></div>
+      </div>
+
+      <div class="card card-teal">
+        <div class="card-header">
+          <div class="card-icon icon-teal">🧠</div>
+          <div>
+            <div class="card-title">الفرق بين الانتكاسة والانهيار</div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card" style="border-color:rgba(232,92,92,0.2);">
+            <div style="font-size:1.5rem; margin-bottom:0.5rem;">❌</div>
+            <div class="card-title" style="color:var(--red-soft);">الانهيار</div>
+            <p class="card-desc">"كل شيء انتهى. أنا فاشل. لا فائدة." — هذا الصوت هو الشيطان، لا الحقيقة.</p>
+          </div>
+          <div class="card" style="border-color:rgba(42,191,163,0.2);">
+            <div style="font-size:1.5rem; margin-bottom:0.5rem;">✅</div>
+            <div class="card-title" style="color:var(--teal);">الانتكاسة</div>
+            <p class="card-desc">"وقعت مرة. هذا جزء من الطريق. أعود الآن." — هذا هو صوت العقل والإيمان.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="text-align:center; padding:2rem;">
+        <div style="font-size:3rem; margin-bottom:0.75rem;">🤲</div>
+        <div class="card-title" style="font-size:1.2rem; margin-bottom:0.75rem;">ابدأ من هنا الآن</div>
+        <p class="card-desc" style="margin-bottom:1.25rem;">استغفر الله مرة واحدة — وهذا يكفي لبداية جديدة</p>
+        <button class="btn btn-gold" onclick="showPage(8); addXP(30); showToast('✓ رجعت — +٣٠ نقطة 💪')">✓ عدتُ — ابدأ من جديد</button>
+      </div>
+
+      <div class="page-nav">
+        <button class="btn btn-outline" onclick="showPage(6)">← السابق</button>
+        <button class="btn btn-gold" onclick="showPage(8)">شبكة الـ٣٠ يوم ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 8: الشبكة ==================== -->
+  <section class="page-section" id="page-8">
+    <div class="page-hero">
+      <div class="page-badge">الصفحة الثامنة</div>
+      <h2 class="page-title">شبكة <span class="gold-accent">الـ٣٠ يوم</span></h2>
+      <p class="page-desc">ظلّل كل يوم تنتصر فيه — الاستمرار يبني القوة</p>
+    </div>
+
+    <div class="section-inner">
+      <!-- Stats -->
+      <div class="grid-4">
+        <div class="stat-card">
+          <span class="stat-num" id="days-done">0</span>
+          <span class="stat-label">يوم مكتمل</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="streak-count">0</span>
+          <span class="stat-label">🔥 أيام متتالية</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="days-left">30</span>
+          <span class="stat-label">يوم متبقٍّ</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="completion-pct">0٪</span>
+          <span class="stat-label">الإنجاز الكلي</span>
+        </div>
+      </div>
+
+      <!-- Score ring -->
+      <div class="ring-center">
+        <div class="score-ring">
+          <svg width="130" height="130" viewBox="0 0 130 130">
+            <defs>
+              <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:var(--gold)"/>
+                <stop offset="100%" style="stop-color:var(--teal)"/>
+              </linearGradient>
+            </defs>
+            <circle class="score-ring-bg" cx="65" cy="65" r="60"/>
+            <circle class="score-ring-fill" cx="65" cy="65" r="60" style="stroke:url(#ringGrad); stroke-dashoffset:377;"/>
+          </svg>
+          <div class="score-ring-text">
+            <span class="score-ring-num" id="ring-days">0</span>
+            <span class="score-ring-label">/ 30</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-gold">📅</div>
+          <div>
+            <div class="card-title">شبكتك الشخصية</div>
+            <div class="card-subtitle">انقر على اليوم لتظليله — كل يوم = +٢٠ نقطة</div>
+          </div>
+        </div>
+        <div class="thirty-day-grid" id="thirty-grid"></div>
+        <div class="grid-actions">
+          <button class="btn btn-gold btn-sm" onclick="markToday()">✓ ظلّل اليوم</button>
+          <button class="btn btn-outline btn-sm" onclick="resetGrid()">🔄 إعادة تعيين</button>
+          <button class="btn btn-teal btn-sm" onclick="showPage(9)">التقرير ←</button>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-gold">🏆</div>
+          <div>
+            <div class="card-title">شاراتك</div>
+            <div class="card-subtitle">أنجز المهام لفتح الشارات</div>
+          </div>
+        </div>
+        <div class="badges-grid" id="badges-grid"></div>
+      </div>
+
+      <div class="page-nav">
+        <button class="btn btn-outline" onclick="showPage(7)">← السابق</button>
+        <button class="btn btn-gold" onclick="showPage(9); setTimeout(generateInsightReport,500)">التقرير والخريطة ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 9: التقرير والخريطة ==================== -->
+  <section class="page-section" id="page-9">
+    <div class="page-hero">
+      <div class="page-badge">الصفحة التاسعة ✦ النهاية</div>
+      <h2 class="page-title">التقرير <span class="gold-accent">والخريطة</span></h2>
+      <p class="page-desc">ملخص رحلتك + خريطتك الشخصية التفاعلية</p>
+    </div>
+
+    <div class="section-inner">
+
+      <!-- Personal Map (static summary card) -->
+      <div class="personal-map-container">
+        <div class="personal-map">
+          <div class="map-inner">
+            <div class="map-header">
+              <div class="map-avatar" id="map-avatar">🧑</div>
+              <div class="map-user-info">
+                <div class="map-user-name" id="map-user-name">— رحلتك —</div>
+                <div class="map-user-sub" id="map-user-sub">مسار التحرر · ZUHD Essence</div>
+              </div>
+              <div class="map-zuhd">
+                <div style="font-size:1.3rem;">🕌</div>
+                <div style="font-size:0.6rem; color:var(--text-muted); text-align:center;">ZUHD</div>
+              </div>
+            </div>
+            <div class="map-grid" id="map-info-grid">
+              <div class="map-section">
+                <div class="map-section-title">⚡ محفزاتك</div>
+                <div class="map-section-content" id="map-triggers">—</div>
+              </div>
+              <div class="map-section">
+                <div class="map-section-title">🎯 سببك الحقيقي</div>
+                <div class="map-section-content" id="map-reason">—</div>
+              </div>
+              <div class="map-section">
+                <div class="map-section-title">🔑 كلمتك السرية</div>
+                <div class="map-section-content" id="map-keyword">—</div>
+              </div>
+              <div class="map-section">
+                <div class="map-section-title">⚠️ إشارة التحذير</div>
+                <div class="map-section-content" id="map-warn">—</div>
+              </div>
+            </div>
+            <div class="map-score-row">
+              <div class="map-score-item">
+                <span class="map-score-num" id="ms-days">0</span>
+                <span class="map-score-label">يوم ✓</span>
+              </div>
+              <div class="map-score-item">
+                <span class="map-score-num" id="ms-streak">0</span>
+                <span class="map-score-label">🔥 سلسلة</span>
+              </div>
+              <div class="map-score-item">
+                <span class="map-score-num" id="ms-points">0</span>
+                <span class="map-score-label">⭐ نقطة</span>
+              </div>
+              <div class="map-score-item">
+                <span class="map-score-num" id="ms-habits">0</span>
+                <span class="map-score-label">عادة ✓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Canvas Map -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-teal">🗺</div>
+          <div>
+            <div class="card-title">خريطتك التفاعلية</div>
+            <div class="card-subtitle">اسحب للتحريك · اضغط بإصبعين للتكبير · قابلة للتحميل بجودة 4K</div>
+          </div>
+        </div>
+        <div class="map-canvas-container">
+          <canvas id="interactive-map-canvas"></canvas>
+          <div class="map-canvas-toolbar">
+            <button class="btn btn-outline btn-sm" onclick="mapZoomIn()">🔍+</button>
+            <button class="btn btn-outline btn-sm" onclick="mapZoomOut()">🔍−</button>
+            <button class="btn btn-outline btn-sm" onclick="mapReset()">⟳ إعادة</button>
+            <span class="map-zoom-info">اسحب للتحريك · اضغط بإصبعين للتكبير</span>
+            <button class="btn btn-gold btn-sm" onclick="downloadMap()">⬇️ تحميل 4K</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Report -->
+      <div id="report-container">
+        <div class="ai-thinking">
+          <div class="thinking-dots">
+            <div class="thinking-dot"></div>
+            <div class="thinking-dot"></div>
+            <div class="thinking-dot"></div>
+          </div>
+          <p>جارٍ تحليل رحلتك...</p>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <button class="btn btn-outline" onclick="showPage(8)">← السابق</button>
+        <button class="btn btn-gold" onclick="showPage(1)">🔄 إعادة البداية</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div style="font-size:2rem;">🕌</div>
+      <div class="footer-brand-text">
+        <span class="footer-brand-name">مسار التحرر · ZUHD Essence</span>
+        <span class="footer-tagline" data-i18n="footer_tagline">الدوبامين الإسلامي — من الوعي إلى التغيير</span>
+      </div>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="footer-social" aria-label="وسائل التواصل الاجتماعي">
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/zuhd-essence-b631393b1/" class="social-btn" aria-label="LinkedIn" title="LinkedIn">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@zuhdmind" class="social-btn" aria-label="YouTube" title="YouTube">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/zuhdessence/" class="social-btn" aria-label="Instagram" title="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@zuhdessence" class="social-btn" aria-label="TikTok" title="TikTok">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      </a>
+      <!-- X (Twitter) -->
+      <a href="https://x.com/ZEssence3538" class="social-btn" aria-label="X (Twitter)" title="X">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+    </div>
+
+    <div class="footer-links">
+      <span data-i18n="footer_science">🧠 مبني على علم النفس السلوكي</span>
+      <span style="color:var(--border);">·</span>
+      <span data-i18n="footer_islam">📖 وفق المنهج الإسلامي</span>
+    </div>
+    <div class="footer-copy" data-i18n="footer_copy">جميع الحقوق محفوظة © ZUHD Essence 2025</div>
+  </div>
+</footer>
+
+<!-- ====== ACHIEVEMENT POPUP ====== -->
+<div class="achievement-popup" id="achievement-popup" aria-live="polite">
+  <div class="achievement-icon">🏅</div>
+  <div>
+    <div class="achievement-title" id="achievement-title">إنجاز!</div>
+    <div class="achievement-desc" id="achievement-desc"></div>
+  </div>
+</div>
+
+<!-- ====== TOAST CONTAINER ====== -->
+<div id="toast-container" aria-live="polite"></div>
+
+<!-- ====== SCRIPTS ====== -->
+<script src="app.js"></script>
+<script>
+// Update personal map card when page 9 opens
+document.querySelector('[onclick*="showPage(9)"]') && void 0;
+
+// Patch showPage to update map card
+const _origShowPage = showPage;
+window.showPage = function(num) {
+  _origShowPage(num);
+  if (num === 9) updatePersonalMapCard();
+};
+
+function updatePersonalMapCard() {
+  const nameEl = document.getElementById('map-user-name');
+  const subEl = document.getElementById('map-user-sub');
+  const avatarEl = document.getElementById('map-avatar');
+  const triggersEl = document.getElementById('map-triggers');
+  const reasonEl = document.getElementById('map-reason');
+  const keyEl = document.getElementById('map-keyword');
+  const warnEl = document.getElementById('map-warn');
+
+  if (nameEl) nameEl.textContent = state.userName || '— رحلتك —';
+  if (subEl) subEl.textContent = (state.lang === 'ar' ? 'مسار التحرر · ' : 'Liberation Path · ') + new Date().toLocaleDateString(state.lang === 'ar' ? 'ar-SA' : 'en-US');
+
+  if (avatarEl) {
+    if (state.userPhoto) {
+      avatarEl.innerHTML = `<img src="${state.userPhoto}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" alt="avatar">`;
+      avatarEl.style.padding = '0';
+    } else {
+      avatarEl.textContent = '🧑';
+    }
+  }
+
+  const timeTags = (state.timeTriggers || []).join(', ') || '—';
+  const placeTags = (state.placeTriggers || []).join(', ') || '—';
+  if (triggersEl) triggersEl.innerHTML = [timeTags, placeTags].filter(t => t !== '—').map(t => `<span class="map-tag">${t}</span>`).join(' ') || '—';
+  if (reasonEl) reasonEl.textContent = state.userReason || '—';
+  if (keyEl) keyEl.textContent = state.keyword || '—';
+  if (warnEl) warnEl.textContent = state.warnSign || '—';
+
+  const done30 = state.thirtyDays.filter(Boolean).length;
+  const streak = getStreak();
+
+  const msMap = { 'ms-days': done30, 'ms-streak': streak, 'ms-points': state.totalPoints, 'ms-habits': Object.values(state.trackerData).filter(Boolean).length };
+  Object.entries(msMap).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  });
+}
+</script>
+</body>
+</html>
